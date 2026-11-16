@@ -1,0 +1,6 @@
+# Raw inputs and tooling that the deployed site never serves
+assets/
+scripts/
+.devin/
+skills-lock.json
+AGENTS.md

@@ -33,7 +33,12 @@ const description =
   "Software developer and AI engineer who builds real-world products that solve customer and user problems, combining platform software development with machine learning and agentic AI.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      (process.env.VERCEL_PROJECT_PRODUCTION_URL
+        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+        : "http://localhost:3000"),
+  ),
   title,
   description,
   authors: [{ name: PROFILE.name, url: PROFILE.github }],
