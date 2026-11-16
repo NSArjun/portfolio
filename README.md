@@ -17,7 +17,17 @@ npm run build      # production build (type-checks + lints)
 npm run start      # serve the production build
 ```
 
-Set `NEXT_PUBLIC_SITE_URL` (e.g. `https://arjunns.dev`) at build time so the Open Graph image URL is absolute.
+## Deployment
+
+Live at **https://arjunns.vercel.app**, served by the Vercel project `arjunns` (team "Arjun's projects"). It is connected to `github.com/NSArjun/portfolio`, so every push to `main` deploys to production, and other branches get preview URLs.
+
+- `vercel.json` pins the Next.js framework preset and the `npm ci` / `npm run build` commands.
+- `package.json` → `engines.node` (`>=20.9.0 <23`) makes Vercel build on Node 22.
+- `.npmrc` pins the public npm registry, so `package-lock.json` never points at a private mirror. Vercel can't reach private mirrors, and `npm ci` hangs if the lockfile uses one.
+- `.vercelignore` keeps `assets/source/` (raw videos) and tooling out of CLI uploads.
+- The Open Graph URL base comes from `NEXT_PUBLIC_SITE_URL` if set, otherwise from Vercel's `VERCEL_PROJECT_PRODUCTION_URL`.
+
+Manual deploy: `vercel deploy --prod` (the folder is linked through `.vercel/`, which is gitignored). The Devin skills `deploy-to-vercel` and `vercel-cli` are installed in `.devin/skills/` and pinned in `skills-lock.json`.
 
 ## Content
 
